@@ -54,10 +54,10 @@ with st.container():
     with col3:
         option3=st.selectbox('Portal', portal)
     with col4:
-        option4=st.selectbox('Genero', genero)
+        option4=st.selectbox('Genero', genero)  
 
 
-if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos':
+if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos':
     tb_portal = df_encuesta.groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
 else:
     if option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos':
