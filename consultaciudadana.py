@@ -15,17 +15,27 @@ df_encuesta.rename(columns={nombres_columnas[0]: 'Portal',nombres_columnas[1]: '
 tb_portal = df_encuesta.groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
 
 
-rango_etario=df_encuesta.rango_etario.unique()
-region=df_encuesta.region.unique()
-portal=df_encuesta.Portal.unique()
-
-
+# listas valores filtros
 unique_rango_etario = df_encuesta['rango_etario'].unique()
 rango_etario = pd.DataFrame({'rango_etario': unique_rango_etario})
 nuevo_registro = pd.DataFrame({'rango_etario': ['Todos']})
 rango_etario = pd.concat([nuevo_registro, rango_etario])
 rango_etario = rango_etario.reset_index(drop=True)
 rango_etario = rango_etario['rango_etario'].tolist()
+
+unique_region = df_encuesta['region'].unique()
+region = pd.DataFrame({'region': unique_region})
+nuevo_registro = pd.DataFrame({'region': ['Todos']})
+region = pd.concat([nuevo_registro, region])
+region = region.reset_index(drop=True)
+region = region['region'].tolist()
+
+unique_portal = df_encuesta['Portal'].unique()
+portal = pd.DataFrame({'Portal': unique_portal})
+nuevo_registro = pd.DataFrame({'Portal': ['Todos']})
+portal = pd.concat([nuevo_registro, portal])
+portal = portal.reset_index(drop=True)
+portal = portal['Portal'].tolist()
 
 
 with st.container():
