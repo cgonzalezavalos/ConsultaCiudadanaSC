@@ -52,7 +52,7 @@ if option1=='Todos' and option2=='Todos' and option3=='Todos':
     tb_portal = df_encuesta.groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
 else:
     if option1!='Todos' and option2=='Todos' and option3=='Todos':
-        filtro=df_encuesta[df_encuesta['rango_etario']==option1]
+        filtro=(df_encuesta[df_encuesta['rango_etario']==option1])
     if option1!='Todos' and option2!='Todos' and option3=='Todos':
         filtro=(df_encuesta['rango_etario']==option1) & (df_encuesta['region']==option2)
     if option1!='Todos' and option2=='Todos' and option3!='Todos':
@@ -65,7 +65,7 @@ else:
         filtro=(df_encuesta['region']==option2)
     if option1=='Todos' and option2=='Todos' & option3!='Todos':
         filtro=(df_encuesta['Portal']==option3)
-    tb_portal=df_encuesta[filtro].groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
+    tb_portal=df_encuesta[df_encuesta[filtro]].groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
 
 
 
