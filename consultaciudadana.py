@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
+import plotly.express as px
 
 
 
@@ -14,6 +15,18 @@ df_encuesta.rename(columns={nombres_columnas[0]: 'Portal',nombres_columnas[1]: '
 tb_portal = df_encuesta.groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
 
 
+rango_etario=df_encuesta.rango_etario.unique()
+region=df_encuesta.region.unique()
+portal=df_encuesta.Portal.unique()
+
+with st.container():
+    col1,col2,col3=st.columns(3)
+    with col1:
+        option1=st.multiselect('Rango etario',rango_etario)
+    with col2:
+        option2=st.multiselect('Región',region)
+    with col3:
+        option3=st.multiselect('Portal', portal)
 
 with st.container():
     st.dataframe(df_encuesta.head(5))
