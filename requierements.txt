@@ -34,9 +34,6 @@ distlib==0.3.6
 distro==1.8.0
 docopt==0.6.2
 docx==0.2.4
-dremio-arrow==1.0.1
-dremio-client==0.15.1
-dremio-flight @ file:///C:/Users/cgonzaleza/downloads/dremio_flight-1.0.0-py3-none-any.whl#sha256=613790c720f0a9ee0d023cddec1f4cb44b334806739bf52b949bccc7bb9de91e
 entrypoints==0.4
 et-xmlfile==1.1.0
 exceptiongroup==1.1.1
