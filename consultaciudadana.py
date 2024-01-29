@@ -3,7 +3,7 @@ import numpy as np
 import streamlit as st
 
 
-df_encuesta = pd.read_excel('datos/Resultados conuslta ciudadana.xlsx', sheet_name='Base de datos')
+df_encuesta = pd.read_excel('datos/Resultados conuslta ciudadana.xlsx', sheet_name='Base de datos',engine='openpyxl')
 df_encuesta['count_discapacidad']=np.where(df_encuesta['discapacidad']=='Sí',1,0)
 
 nombres_columnas = df_encuesta.columns
