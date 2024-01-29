@@ -53,7 +53,7 @@ with st.container():
         option2=st.selectbox('Región',region)
     with col3:
         option3=st.selectbox('Portal', portal)
-    with col3:
+    with col4:
         option4=st.selectbox('Genero', genero)
 
 
