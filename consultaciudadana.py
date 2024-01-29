@@ -37,15 +37,24 @@ portal = pd.concat([nuevo_registro, portal])
 portal = portal.reset_index(drop=True)
 portal = portal['Portal'].tolist()
 
+unique_genero = df_encuesta['genero'].unique()
+genero = pd.DataFrame({'genero': unique_genero})
+nuevo_registro = pd.DataFrame({'genero': ['Todos']})
+genero = pd.concat([nuevo_registro, genero])
+genero = genero.reset_index(drop=True)
+genero = genero['genero'].tolist()
+
 
 with st.container():
-    col1,col2,col3=st.columns(3)
+    col1,col2,col3,col4=st.columns(4)
     with col1:
         option1=st.selectbox('Rango etario',rango_etario)
     with col2:
         option2=st.selectbox('Región',region)
     with col3:
         option3=st.selectbox('Portal', portal)
+    with col3:
+        option4=st.selectbox('Genero', genero)
 
 
 if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos':
@@ -67,11 +76,6 @@ else:
         filtro = df_encuesta['Portal'] == option3
     
     tb_portal = df_encuesta[filtro].groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
-
-
-
-
-
 
 
 with st.container():
