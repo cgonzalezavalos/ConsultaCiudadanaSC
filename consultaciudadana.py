@@ -19,6 +19,15 @@ rango_etario=df_encuesta.rango_etario.unique()
 region=df_encuesta.region.unique()
 portal=df_encuesta.Portal.unique()
 
+
+unique_rango_etario = df_encuesta['rango_etario'].unique()
+rango_etario = pd.DataFrame({'rango_etario': unique_rango_etario})
+nuevo_registro = pd.DataFrame({'rango_etario': ['Todos']})
+rango_etario = pd.concat([nuevo_registro, rango_etario])
+rango_etario = rango_etario.reset_index(drop=True)
+rango_etario = rango_etario['rango_etario'].tolist()
+
+
 with st.container():
     col1,col2,col3=st.columns(3)
     with col1:
