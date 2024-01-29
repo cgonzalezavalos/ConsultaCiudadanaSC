@@ -1,9 +1,7 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
-import openpyxl
 import matplotlib.pyplot as plt
-
 
 
 df_encuesta = pd.read_excel('datos/Resultados conuslta ciudadana.xlsx', sheet_name='Base de datos')
