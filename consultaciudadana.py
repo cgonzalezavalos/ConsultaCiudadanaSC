@@ -41,11 +41,11 @@ portal = portal['Portal'].tolist()
 with st.container():
     col1,col2,col3=st.columns(3)
     with col1:
-        option1=st.multiselect('Rango etario',rango_etario)
+        option1=st.selectbox('Rango etario',rango_etario)
     with col2:
-        option2=st.multiselect('Región',region)
+        option2=st.selectbox('Región',region)
     with col3:
-        option3=st.multiselect('Portal', portal)
+        option3=st.selectbox('Portal', portal)
 
 
 if option1=='Todos' and option2=='Todos' and option3=='Todos':
