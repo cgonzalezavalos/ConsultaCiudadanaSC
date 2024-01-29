@@ -29,5 +29,4 @@ with st.container():
         option3=st.multiselect('Portal', portal)
 
 with st.container():
-    st.dataframe(df_encuesta.head(5))
     st.dataframe(tb_portal)
