@@ -44,9 +44,16 @@ genero = pd.concat([nuevo_registro, genero])
 genero = genero.reset_index(drop=True)
 genero = genero['genero'].tolist()
 
+unique_discapacidad = df_encuesta['discapacidad'].unique()
+discapacidad = pd.DataFrame({'discapacidad': unique_discapacidad})
+nuevo_registro = pd.DataFrame({'discapacidad': ['Todos']})
+discapacidad = pd.concat([nuevo_registro, discapacidad])
+discapacidad = discapacidad.reset_index(drop=True)
+discapacidad = discapacidad['discapacidad'].tolist()
+
 
 with st.container():
-    col1,col2,col3,col4=st.columns(4)
+    col1,col2,col3,col4,col5=st.columns(5)
     with col1:
         option1=st.selectbox('Rango etario',rango_etario)
     with col2:
@@ -55,40 +62,70 @@ with st.container():
         option3=st.selectbox('Portal', portal)
     with col4:
         option4=st.selectbox('Genero', genero)  
+    with col5:
+        option5=st.selectbox('Discapacidad', discapacidad)  
 
-
-if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos':
+if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
     tb_portal = df_encuesta.groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
 else:
-    if option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos':
+    if option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
         filtro = df_encuesta['rango_etario'] == option1
-    elif option1 != 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 == 'Todos':
+    elif option1 != 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
         filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['region'] == option2)
-    elif option1 != 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 == 'Todos':
+    elif option1 != 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 == 'Todos' and option5 == 'Todos':
         filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['Portal'] == option3)
-    elif option1 != 'Todos' and option2 != 'Todos' and option3 != 'Todos' and option4 == 'Todos':
+    elif option1 != 'Todos' and option2 != 'Todos' and option3 != 'Todos' and option4 == 'Todos' and option5 == 'Todos':
         filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['region'] == option2) & (df_encuesta['Portal'] == option3)
-    elif option1 == 'Todos' and option2 != 'Todos' and option3 != 'Todos' and option4 == 'Todos':
+    elif option1 == 'Todos' and option2 != 'Todos' and option3 != 'Todos' and option4 == 'Todos' and option5 == 'Todos':
         filtro = (df_encuesta['region'] == option2) & (df_encuesta['Portal'] == option3)
-    elif option1 == 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 == 'Todos':
+    elif option1 == 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
         filtro = df_encuesta['region'] == option2
-    elif option1 == 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 == 'Todos':
+    elif option1 == 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 == 'Todos' and option5 == 'Todos':
         filtro = df_encuesta['Portal'] == option3
-    elif option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 != 'Todos':
+    elif option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 != 'Todos' and option5 == 'Todos':
         filtro = (df_encuesta['rango_etario'] == option1)  & (df_encuesta['genero'] == option4)
-    elif option1 != 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 != 'Todos':
+    elif option1 != 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 != 'Todos' and option5 == 'Todos':
         filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['region'] == option2)  & (df_encuesta['genero'] == option4)
-    elif option1 != 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 != 'Todos':
+    elif option1 != 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 != 'Todos' and option5 == 'Todos':
         filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['Portal'] == option3)  & (df_encuesta['genero'] == option4)
-    elif option1 != 'Todos' and option2 != 'Todos' and option3 != 'Todos' and option4 != 'Todos':
+    elif option1 != 'Todos' and option2 != 'Todos' and option3 != 'Todos' and option4 != 'Todos' and option5 == 'Todos':
         filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['region'] == option2) & (df_encuesta['Portal'] == option3)  & (df_encuesta['genero'] == option4)
-    elif option1 == 'Todos' and option2 != 'Todos' and option3 != 'Todos' and option4 != 'Todos':
+    elif option1 == 'Todos' and option2 != 'Todos' and option3 != 'Todos' and option4 != 'Todos' and option5 == 'Todos':
         filtro = (df_encuesta['region'] == option2) & (df_encuesta['Portal'] == option3)  & (df_encuesta['genero'] == option4)
-    elif option1 == 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 != 'Todos':
+    elif option1 == 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 != 'Todos' and option5 == 'Todos':
         filtro = (df_encuesta['region'] == option2) & (df_encuesta['genero'] == option4)
-    elif option1 == 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 != 'Todos':
+    elif option1 == 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 != 'Todos' and option5 == 'Todos':
         filtro = (df_encuesta['Portal'] == option3) & (df_encuesta['genero'] == option4)
-    
+    elif option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['discapacidad'] == option5)
+    elif option1 != 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['region'] == option2) & (df_encuesta['discapacidad'] == option5)
+    elif option1 != 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 == 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['Portal'] == option3) & (df_encuesta['discapacidad'] == option5)
+    elif option1 != 'Todos' and option2 != 'Todos' and option3 != 'Todos' and option4 == 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['region'] == option2) & (df_encuesta['Portal'] == option3) & (df_encuesta['discapacidad'] == option5)
+    elif option1 == 'Todos' and option2 != 'Todos' and option3 != 'Todos' and option4 == 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['region'] == option2) & (df_encuesta['Portal'] == option3) & (df_encuesta['discapacidad'] == option5)
+    elif option1 == 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['region'] == option2) & (df_encuesta['discapacidad'] == option5)
+    elif option1 == 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 == 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['Portal'] == option3) & (df_encuesta['discapacidad'] == option5)
+    elif option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 != 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['rango_etario'] == option1)  & (df_encuesta['genero'] == option4)  & (df_encuesta['discapacidad'] == option5)
+    elif option1 != 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 != 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['region'] == option2)  & (df_encuesta['genero'] == option4)  & (df_encuesta['discapacidad'] == option5)
+    elif option1 != 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 != 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['Portal'] == option3)  & (df_encuesta['genero'] == option4)  & (df_encuesta['discapacidad'] == option5)
+    elif option1 != 'Todos' and option2 != 'Todos' and option3 != 'Todos' and option4 != 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['region'] == option2) & (df_encuesta['Portal'] == option3)  & (df_encuesta['genero'] == option4)  & (df_encuesta['discapacidad'] == option5)
+    elif option1 == 'Todos' and option2 != 'Todos' and option3 != 'Todos' and option4 != 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['region'] == option2) & (df_encuesta['Portal'] == option3)  & (df_encuesta['genero'] == option4)  & (df_encuesta['discapacidad'] == option5)
+    elif option1 == 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 != 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['region'] == option2) & (df_encuesta['genero'] == option4)  & (df_encuesta['discapacidad'] == option5)
+    elif option1 == 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 != 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['Portal'] == option3) & (df_encuesta['genero'] == option4)  & (df_encuesta['discapacidad'] == option5)
+
+
     tb_portal = df_encuesta[filtro].groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
 
 
