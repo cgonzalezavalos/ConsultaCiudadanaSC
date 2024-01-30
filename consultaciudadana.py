@@ -96,6 +96,7 @@ else:
         filtro = (df_encuesta['region'] == option2) & (df_encuesta['genero'] == option4)
     elif option1 == 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 != 'Todos' and option5 == 'Todos':
         filtro = (df_encuesta['Portal'] == option3) & (df_encuesta['genero'] == option4)
+
     elif option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 != 'Todos':
         filtro = (df_encuesta['rango_etario'] == option1) & (df_encuesta['discapacidad'] == option5)
     elif option1 != 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 != 'Todos':
@@ -124,6 +125,16 @@ else:
         filtro = (df_encuesta['region'] == option2) & (df_encuesta['genero'] == option4)  & (df_encuesta['discapacidad'] == option5)
     elif option1 == 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 != 'Todos' and option5 != 'Todos':
         filtro = (df_encuesta['Portal'] == option3) & (df_encuesta['genero'] == option4)  & (df_encuesta['discapacidad'] == option5)
+    elif option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 != 'Todos':
+        filtro = (df_encuesta['discapacidad'] == option5)
+    elif option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
+        filtro = (df_encuesta['rango_etario'] == option1)
+    elif option1 == 'Todos' and option2 != 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
+        filtro = (df_encuesta['region'] == option2)
+    elif option1 == 'Todos' and option2 == 'Todos' and option3 != 'Todos' and option4 == 'Todos' and option5 == 'Todos':
+        filtro = (df_encuesta['Portal'] == option3)
+    elif option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 != 'Todos' and option5 == 'Todos':
+        filtro = (df_encuesta['genero'] == option4)
 
 
     tb_portal = df_encuesta[filtro].groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
