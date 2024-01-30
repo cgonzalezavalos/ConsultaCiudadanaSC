@@ -204,10 +204,12 @@ with st.container():
     with col2:
         st.dataframe(resultado_encuesta.head(20), width=1500, height=500)
         #st.dataframe(tb1, width=1500, height=500)
-        
-        
+
+# Define el orden deseado para la categoría 'genero'
+ult_post_order = ['Menos de un mes','Entre un mes y seis (6) meses', 'Más de seis (6) meses y menos de un año', 'Más de un año y menos de tres años','Hace más de tres años']     
 #graf_1=px.bar(tb1, x='Portal', y='Respuestas', color='genero',barmode='group' ,title='Respuestas por Portal')
-graf_1=px.bar(tb1, x='genero', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la ultima postulación?')
+#tb1=resultado_encuesta[filtro].groupby(['Ultima_Postulacion','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+graf_1=px.bar(tb1, x='genero', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la ultima postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
 
 with st.container():
     st.plotly_chart(graf_1, use_container_width=True)
