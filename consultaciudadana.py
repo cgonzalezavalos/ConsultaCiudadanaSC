@@ -113,6 +113,7 @@ if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 
     tb_g2=resultado_encuesta.groupby(['Nota_facilidad_postulación','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g3=resultado_encuesta.groupby(['Nota_pertinencia_info_solicitada','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g4=resultado_encuesta.groupby(['Contactada_en_proceso','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_g5=resultado_encuesta.groupby(['Nota_calidad_evaluacion_realizada','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
 else:
     if option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
         filtro = df_encuesta['rango_etario'] == option1
@@ -193,6 +194,7 @@ else:
     tb_g2=resultado_encuesta[filtro].groupby(['Nota_facilidad_postulación','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g3=resultado_encuesta[filtro].groupby(['Nota_pertinencia_info_solicitada','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g4=resultado_encuesta[filtro].groupby(['Contactada_en_proceso','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_g5=resultado_encuesta[filtro].groupby(['Nota_calidad_evaluacion_realizada','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
 #------------------------------------------------------------------------
 respuestas=tb_portal['Respuestas'].sum()
 
@@ -210,19 +212,23 @@ with st.container():
             mime='text/csv'
             )
     with col2:
-        st.dataframe(resultado_encuesta.head(20), width=1500, height=500)
+        st.dataframe(resultado_encuesta.head(5), width=1500, height=500)
+        st.caption('muestra del dataset')
         #st.dataframe(tb1, width=1500, height=500)
 
 # Define el orden deseado para la categoría 'genero'
 ult_post_order = ['Menos de un mes','Entre un mes y seis (6) meses', 'Más de seis (6) meses y menos de un año', 'Más de un año y menos de tres años','Hace más de tres años']     
 afirmacion_order = ['Sí','No', 'No aplica']     
 graf_g1=px.bar(tb_g1, x='genero', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
-graf_g2=px.bar(tb_g2, x='genero', y='Respuestas',color='Nota_facilidad_postulación',barmode='group' ,title='Cuan fácil fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
-graf_g3=px.bar(tb_g3, x='genero', y='Respuestas',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
+graf_g2=px.bar(tb_g2, x='genero', y='Respuestas',color='Nota_facilidad_postulación',barmode='group' ,title='Cuan fácil fue la última postulación?')
+graf_g3=px.bar(tb_g3, x='genero', y='Respuestas',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?')
 graf_g4=px.bar(tb_g4, x='genero', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
+graf_g5=px.bar(tb_g5, x='genero', y='Respuestas',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?')
+
 
 with st.container():
     st.plotly_chart(graf_g1, use_container_width=True)
     st.plotly_chart(graf_g2, use_container_width=True)
     st.plotly_chart(graf_g3, use_container_width=True)
     st.plotly_chart(graf_g4, use_container_width=True)
+    st.plotly_chart(graf_g5, use_container_width=True)
