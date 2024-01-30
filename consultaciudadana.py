@@ -203,7 +203,7 @@ with st.container():
             )
     with col2:
         st.dataframe(resultado_encuesta.head(20), width=1500, height=500)
-        st.dataframe(tb1, width=1500, height=500)
+        #st.dataframe(tb1, width=1500, height=500)
         
         
 graf_1=px.bar(tb1, x='Portal', y='Respuestas', color='Ultima_Postulacion', title='Respuestas por Portal')
