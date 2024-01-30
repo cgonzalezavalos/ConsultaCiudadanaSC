@@ -203,7 +203,7 @@ with st.container():
         st.dataframe(resultado_encuesta.head(20), width=1500, height=500)
         
         
-graf_1=px.bar(resultado_encuesta, x='Portal', y='Contador', color='Ultima_Postulacion', title='Respuestas por Portal')
+graf_1=px.bar(resultado_encuesta, x='Portal', y='contador', color='Ultima_Postulacion', title='Respuestas por Portal')
 
 with st.container():
     st.plotly_chart(graf_1, use_container_width=True)
