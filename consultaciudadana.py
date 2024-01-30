@@ -202,6 +202,7 @@ else:
     resultado_encuesta=df_encuesta[filtro]
     tb_g0=resultado_encuesta[filtro].groupby(['genero']).agg(Total=('contador', 'sum')).reset_index()
     tb_g1=resultado_encuesta[filtro].groupby(['Ultima_Postulacion','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_g1=pd.merge(tb_g1,tb_g0,how='left',on='genero')
     tb_g2=resultado_encuesta[filtro].groupby(['Nota_facilidad_postulación','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g3=resultado_encuesta[filtro].groupby(['Nota_pertinencia_info_solicitada','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g4=resultado_encuesta[filtro].groupby(['Contactada_en_proceso','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
