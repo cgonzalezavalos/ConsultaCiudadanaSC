@@ -265,7 +265,7 @@ with st.container():
 # Define el orden deseado para la categoría 'genero'
 ult_post_order = ['Menos de un mes','Entre un mes y seis (6) meses', 'Más de seis (6) meses y menos de un año', 'Más de un año y menos de tres años','Hace más de tres años']     
 afirmacion_order = ['Sí','No', 'No aplica']     
-graf_g1_p=px.bar(tb_g1, x='genero', y='porcentaje',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order}).update_layout(showlegend=False).update_yaxes(tickformat="%")
+graf_g1_p=px.bar(tb_g1, x='genero', y='porcentaje',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order}).update_layout(showlegend=False).update_yaxes(tickformat=".2%")
 graf_g1_c=px.bar(tb_g1, x='genero', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
 
 graf_g2_p=px.bar(tb_g2, x='genero', y='porcentaje',color='Nota_facilidad_postulación',barmode='group' ,title='Cuan fácil fue la última postulación?').update_layout(showlegend=False).update_yaxes(tickformat="%")
