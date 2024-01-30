@@ -219,10 +219,10 @@ afirmacion_order = ['Sí','No', 'No aplica']
 graf_g1=px.bar(tb_g1, x='genero', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
 graf_g2=px.bar(tb_g2, x='genero', y='Respuestas',color='Nota_facilidad_postulación',barmode='group' ,title='Cuan fácil fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
 graf_g3=px.bar(tb_g3, x='genero', y='Respuestas',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
-graf_g4=px.bar(tb_g4, x='genero', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'afirmacion_order'})
+#graf_g4=px.bar(tb_g4, x='genero', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'afirmacion_order'})
 
 with st.container():
     st.plotly_chart(graf_g1, use_container_width=True)
     st.plotly_chart(graf_g2, use_container_width=True)
     st.plotly_chart(graf_g3, use_container_width=True)
-    st.plotly_chart(graf_g4, use_container_width=True)
+#    st.plotly_chart(graf_g4, use_container_width=True)
