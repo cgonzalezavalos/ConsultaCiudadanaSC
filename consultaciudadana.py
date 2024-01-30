@@ -107,7 +107,7 @@ with st.container():
 if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
     tb_portal = df_encuesta.groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
     resultado_encuesta=df_encuesta
-    tb1=resultado_encuesta.groupby(['Portal','Ultima_Postulacion']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb1=resultado_encuesta.groupby(['Portal','Ultima_Postulacion','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
 else:
     if option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
         filtro = df_encuesta['rango_etario'] == option1
@@ -184,7 +184,7 @@ else:
 
     tb_portal = df_encuesta[filtro].groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
     resultado_encuesta=df_encuesta[filtro]
-    tb1=resultado_encuesta[filtro].groupby(['Portal','Ultima_Postulacion']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb1=resultado_encuesta[filtro].groupby(['Portal','Ultima_Postulacion','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
 #------------------------------------------------------------------------
 respuestas=tb_portal['Respuestas'].sum()
 
@@ -206,7 +206,7 @@ with st.container():
         #st.dataframe(tb1, width=1500, height=500)
         
         
-graf_1=px.bar(tb1, x='Portal', y='Respuestas', color='Ultima_Postulacion', title='Respuestas por Portal')
+graf_1=px.bar(tb1, x='Portal', y='Respuestas', color='genero',barmode='group' title='Respuestas por Portal')
 
 with st.container():
     st.plotly_chart(graf_1, use_container_width=True)
