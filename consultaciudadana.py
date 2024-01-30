@@ -189,8 +189,6 @@ with st.container():
         valor = f"{respuestas:,}"
         st.markdown(f"<h1 style='text-align: center; color: grey;'>{valor}</h1>", unsafe_allow_html=True)
         st.markdown("<h3 style='text-align: center; color: grey;'>Número de respuestas</h3>", unsafe_allow_html=True)
-    with col2:
-        st.dataframe(tb_portal, width=1500, height=500)
         file_content = generate_file_content(tb_portal)
         st.download_button(
             label='Descargar',
@@ -198,3 +196,6 @@ with st.container():
             file_name='resultados_encuesta.csv',
             mime='text/csv'
             )
+    with col2:
+        st.dataframe(tb_portal, width=1500, height=500)
+        
