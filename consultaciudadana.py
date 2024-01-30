@@ -186,7 +186,7 @@ respuestas=tb_portal['Respuestas'].sum()
 with st.container():
     col1, col2=st.columns(2)
     with col1:
-        valor=f"{respuestas:.0}"
+        valor = f"{respuestas:,}"
         st.markdown(f"<h1 style='text-align: center; color: grey;'>{valor}</h1>", unsafe_allow_html=True)
         st.markdown("<h3 style='text-align: center; color: grey;'>Número de respuestas</h3>", unsafe_allow_html=True)
     with col2:
