@@ -27,8 +27,7 @@ st.markdown(
 # Add horizontal line
 st.markdown("<hr>", unsafe_allow_html=True)
 
-
-
+#------------ carga de datos ------------------------------------
 @st.cache_data
 def encuesta():
     df_consulta=pd.read_excel('datos/Resultados conuslta ciudadana.xlsx', sheet_name='Base de datos')
@@ -38,8 +37,11 @@ def encuesta():
     return df_consulta
 
 df_encuesta = encuesta()
+#------------------------------------------------------------------------
 
+#------------------------------------------------------------------------
 # listas valores filtros
+#------------------------------------------------------------------------
 unique_rango_etario = df_encuesta['rango_etario'].unique()
 rango_etario = pd.DataFrame({'rango_etario': unique_rango_etario})
 nuevo_registro = pd.DataFrame({'rango_etario': ['Todos']})
@@ -74,8 +76,9 @@ nuevo_registro = pd.DataFrame({'discapacidad': ['Todos']})
 discapacidad = pd.concat([nuevo_registro, discapacidad])
 discapacidad = discapacidad.reset_index(drop=True)
 discapacidad = discapacidad['discapacidad'].tolist()
-
-
+#------------------------------------------------------------------------
+#------------------------------------------------------------------------
+# Filtros
 with st.container():
     col1,col2,col3,col4,col5=st.columns(5)
     with col1:
@@ -88,7 +91,9 @@ with st.container():
         option4=st.selectbox('Genero', genero)  
     with col5:
         option5=st.selectbox('Discapacidad', discapacidad)  
-
+#------------------------------------------------------------------------
+# aplicacion de filtros
+#------------------------------------------------------------------------
 if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
     tb_portal = df_encuesta.groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
 else:
@@ -166,7 +171,7 @@ else:
 
 
     tb_portal = df_encuesta[filtro].groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
-
+#------------------------------------------------------------------------
 
 with st.container():
     st.dataframe(tb_portal)
