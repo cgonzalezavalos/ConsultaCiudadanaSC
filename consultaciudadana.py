@@ -182,7 +182,7 @@ else:
     tb_portal = df_encuesta[filtro].groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
 #------------------------------------------------------------------------
 respuestas=tb_portal['Respuestas'].sum()
-st.write('Total de respuestas: ',respuestas)
+st.markdown(f'Total de respuestas: {respuestas}')
 with st.container():
     st.dataframe(tb_portal, width=1500, height=500)
     file_content = generate_file_content(tb_portal)
