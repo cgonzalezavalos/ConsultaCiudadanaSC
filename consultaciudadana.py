@@ -108,6 +108,7 @@ if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 
     tb_portal = df_encuesta.groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
     resultado_encuesta=df_encuesta
     tb1=resultado_encuesta.groupby(['Ultima_Postulacion','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb2=resultado_encuesta.groupby(['Nota_facilidad_postulacion','Portal']).agg(Respuestas=('contador', 'sum')).reset_index()
 else:
     if option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
         filtro = df_encuesta['rango_etario'] == option1
@@ -185,6 +186,7 @@ else:
     tb_portal = df_encuesta[filtro].groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
     resultado_encuesta=df_encuesta[filtro]
     tb1=resultado_encuesta[filtro].groupby(['Ultima_Postulacion','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb2=resultado_encuesta[filtro].groupby(['Nota_facilidad_postulacion','Portal']).agg(Respuestas=('contador', 'sum')).reset_index()
 #------------------------------------------------------------------------
 respuestas=tb_portal['Respuestas'].sum()
 
@@ -207,9 +209,9 @@ with st.container():
 
 # Define el orden deseado para la categoría 'genero'
 ult_post_order = ['Menos de un mes','Entre un mes y seis (6) meses', 'Más de seis (6) meses y menos de un año', 'Más de un año y menos de tres años','Hace más de tres años']     
-#graf_1=px.bar(tb1, x='Portal', y='Respuestas', color='genero',barmode='group' ,title='Respuestas por Portal')
-#tb1=resultado_encuesta[filtro].groupby(['Ultima_Postulacion','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
-graf_1=px.bar(tb1, x='genero', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la ultima postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
+graf_1=px.bar(tb1, x='genero', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
+graf_2=px.bar(tb2, x='Portal', y='Respuestas',color='Nota_facilidad_postulacion',barmode='group' ,title='Cuan fácil fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
 
 with st.container():
     st.plotly_chart(graf_1, use_container_width=True)
+    st.plotly_chart(graf_2, use_container_width=True)
