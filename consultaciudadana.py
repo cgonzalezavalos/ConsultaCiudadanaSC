@@ -212,7 +212,7 @@ with st.container():
             mime='text/csv'
             )
     with col2:
-        st.dataframe(resultado_encuesta.head(5), width=1500, height=500)
+        st.dataframe(resultado_encuesta.head(5), width=1500, height=200)
         st.caption('muestra del dataset')
         #st.dataframe(tb1, width=1500, height=500)
 
