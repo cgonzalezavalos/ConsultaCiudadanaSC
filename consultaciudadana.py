@@ -250,6 +250,11 @@ with st.container():
         valor = f"{respuestas:,}"
         st.markdown(f"<h1 style='text-align: center; color: grey;'>{valor}</h1>", unsafe_allow_html=True)
         st.markdown("<h3 style='text-align: center; color: grey;'>Número de respuestas</h3>", unsafe_allow_html=True)
+
+    with col2:
+        st.dataframe(resultado_encuesta.head(5), width=1500, height=200)
+        st.caption('muestra del dataset')
+        #st.dataframe(tb1, width=1500, height=500)
         file_content = generate_file_content(resultado_encuesta)
         st.download_button(
             label='Descargar',
@@ -257,10 +262,6 @@ with st.container():
             file_name='resultados_encuesta.csv',
             mime='text/csv'
             )
-    with col2:
-        st.dataframe(resultado_encuesta.head(5), width=1500, height=200)
-        st.caption('muestra del dataset')
-        #st.dataframe(tb1, width=1500, height=500)
 
 # Define el orden deseado para la categoría 'genero'
 ult_post_order = ['Menos de un mes','Entre un mes y seis (6) meses', 'Más de seis (6) meses y menos de un año', 'Más de un año y menos de tres años','Hace más de tres años']     
