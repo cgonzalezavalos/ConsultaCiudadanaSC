@@ -245,7 +245,7 @@ graf_g7=px.bar(tb_g7, x='genero', y='Respuestas',color='Nota_proceso_reclutamien
 
 
 with st.container():
-    col1,col2=st
+    col1,col2=st.columns(2)
     with col1:
         st.plotly_chart(graf_g1_p, use_container_width=True)
     with col2:
