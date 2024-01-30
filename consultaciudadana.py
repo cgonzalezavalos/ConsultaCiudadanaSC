@@ -271,19 +271,19 @@ graf_g1_c=px.bar(tb_g1, x='genero', y='Respuestas',color='Ultima_Postulacion',ba
 graf_g2_p=px.bar(tb_g2, x='genero', y='porcentaje',color='Nota_facilidad_postulación',barmode='group' ,title='Cuan fácil fue la última postulación?').update_layout(showlegend=False).update_yaxes(tickformat="%")
 graf_g2_c=px.bar(tb_g2, x='genero', y='Respuestas',color='Nota_facilidad_postulación',barmode='group' ,title='Cuan fácil fue la última postulación?')
 
-graf_g3_p=px.bar(tb_g3, x='genero', y='porcentaje',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?').update_layout(showlegend=False).update_yaxes(tickformat="%")
+graf_g3_p=px.bar(tb_g3, x='genero', y='porcentaje',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?').update_layout(showlegend=False).update_yaxes(tickformat=".2%")
 graf_g3_c=px.bar(tb_g3, x='genero', y='Respuestas',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?')
 
-graf_g4_p=px.bar(tb_g4, x='genero', y='porcentaje',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order}).update_layout(showlegend=False).update_yaxes(tickformat="%")
+graf_g4_p=px.bar(tb_g4, x='genero', y='porcentaje',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order}).update_layout(showlegend=False).update_yaxes(tickformat=".2%")
 graf_g4_c=px.bar(tb_g4, x='genero', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
 
-graf_g5_p=px.bar(tb_g5, x='genero', y='porcentaje',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?').update_layout(showlegend=False).update_yaxes(tickformat="%")
+graf_g5_p=px.bar(tb_g5, x='genero', y='porcentaje',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?').update_layout(showlegend=False).update_yaxes(tickformat=".2%")
 graf_g5_c=px.bar(tb_g5, x='genero', y='Respuestas',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?')
 
-graf_g6_p=px.bar(tb_g6, x='genero', y='porcentaje',color='Nota_oportunidad_entrega_resultados',barmode='group' ,title='Con que nota calificas la oportunidad de entrega de resultados?').update_layout(showlegend=False).update_yaxes(tickformat="%")
+graf_g6_p=px.bar(tb_g6, x='genero', y='porcentaje',color='Nota_oportunidad_entrega_resultados',barmode='group' ,title='Con que nota calificas la oportunidad de entrega de resultados?').update_layout(showlegend=False).update_yaxes(tickformat=".2%")
 graf_g6_c=px.bar(tb_g6, x='genero', y='Respuestas',color='Nota_oportunidad_entrega_resultados',barmode='group' ,title='Con que nota calificas la oportunidad de entrega de resultados?')
 
-graf_g7_p=px.bar(tb_g7, x='genero', y='porcentaje',color='Nota_proceso_reclutamiento_seleccion',barmode='group' ,title='Con que nota calificas el proceso de reclutamiento al que postuló?').update_layout(showlegend=False).update_yaxes(tickformat="%")
+graf_g7_p=px.bar(tb_g7, x='genero', y='porcentaje',color='Nota_proceso_reclutamiento_seleccion',barmode='group' ,title='Con que nota calificas el proceso de reclutamiento al que postuló?').update_layout(showlegend=False).update_yaxes(tickformat=".2%")
 graf_g7_c=px.bar(tb_g7, x='genero', y='Respuestas',color='Nota_proceso_reclutamiento_seleccion',barmode='group' ,title='Con que nota calificas el proceso de reclutamiento al que postuló?')
 
 
