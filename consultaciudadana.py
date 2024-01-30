@@ -105,6 +105,7 @@ with st.container():
 #------------------------------------------------------------------------
 if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
     tb_portal = df_encuesta.groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
+    resultado_encuesta=df_encuesta
 else:
     if option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
         filtro = df_encuesta['rango_etario'] == option1
@@ -180,6 +181,7 @@ else:
 
 
     tb_portal = df_encuesta[filtro].groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
+    resultado_encuesta=df_encuesta[filtro]
 #------------------------------------------------------------------------
 respuestas=tb_portal['Respuestas'].sum()
 
@@ -197,5 +199,6 @@ with st.container():
             mime='text/csv'
             )
     with col2:
-        st.dataframe(tb_portal, width=1500, height=500)
+        st.dataframe(resultado_encuesta.head(20), width=1500, height=500)
+        
         
