@@ -125,6 +125,8 @@ if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 
     tb_g3=pd.merge(tb_g3,tb_g0,how='left',on='genero')
 
     tb_g4=resultado_encuesta.groupby(['Contactada_en_proceso','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_g4=pd.merge(tb_g4,tb_g0,how='left',on='genero')
+
     tb_g5=resultado_encuesta.groupby(['Nota_calidad_evaluacion_realizada','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g6=resultado_encuesta.groupby(['Nota_oportunidad_entrega_resultados','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g7=resultado_encuesta.groupby(['Nota_proceso_reclutamiento_seleccion','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
@@ -217,6 +219,8 @@ else:
     tb_g3=pd.merge(tb_g3,tb_g0,how='left',on='genero')
 
     tb_g4=resultado_encuesta[filtro].groupby(['Contactada_en_proceso','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_g4=pd.merge(tb_g4,tb_g0,how='left',on='genero')
+
     tb_g5=resultado_encuesta[filtro].groupby(['Nota_calidad_evaluacion_realizada','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g5=resultado_encuesta[filtro].groupby(['Nota_calidad_evaluacion_realizada','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g6=resultado_encuesta[filtro].groupby(['Nota_oportunidad_entrega_resultados','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
@@ -226,6 +230,7 @@ respuestas=tb_portal['Respuestas'].sum()
 tb_g1['porcentaje']=tb_g1['Respuestas']/tb_g1['Total']
 tb_g2['porcentaje']=tb_g2['Respuestas']/tb_g2['Total']
 tb_g3['porcentaje']=tb_g3['Respuestas']/tb_g3['Total']
+tb_g4['porcentaje']=tb_g4['Respuestas']/tb_g4['Total']
 
 with st.container():
     col1, col2=st.columns(spec=[0.2,0.8])
@@ -257,7 +262,9 @@ graf_g2_c=px.bar(tb_g2, x='genero', y='Respuestas',color='Nota_facilidad_postula
 graf_g3_p=px.bar(tb_g3, x='genero', y='porcentaje',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?')
 graf_g3_c=px.bar(tb_g3, x='genero', y='Respuestas',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?')
 
-graf_g4=px.bar(tb_g4, x='genero', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
+graf_g4_p=px.bar(tb_g4, x='genero', y='porcentaje',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
+graf_g4_c=px.bar(tb_g4, x='genero', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
+
 graf_g5=px.bar(tb_g5, x='genero', y='Respuestas',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?')
 graf_g6=px.bar(tb_g6, x='genero', y='Respuestas',color='Nota_oportunidad_entrega_resultados',barmode='group' ,title='Con que nota calificas la oportunidad de entrega de resultados?')
 graf_g7=px.bar(tb_g7, x='genero', y='Respuestas',color='Nota_proceso_reclutamiento_seleccion',barmode='group' ,title='Con que nota calificas el proceso de reclutamiento al que postuló?')
@@ -279,10 +286,15 @@ with st.container():
         st.plotly_chart(graf_g3_p, use_container_width=True)
     with col4:
         st.plotly_chart(graf_g3_c, use_container_width=True)
+    col7,col8=st.columns(2)
+    with col3:
+        st.plotly_chart(graf_g4_p, use_container_width=True)
+    with col4:
+        st.plotly_chart(graf_g4_c, use_container_width=True)
 
     
 
-    st.plotly_chart(graf_g4, use_container_width=True)
+    
     st.plotly_chart(graf_g5, use_container_width=True)
     st.plotly_chart(graf_g6, use_container_width=True)
     st.plotly_chart(graf_g7, use_container_width=True)
