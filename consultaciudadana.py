@@ -183,7 +183,7 @@ else:
 #------------------------------------------------------------------------
 
 with st.container():
-    st.dataframe(tb_portal, width=1000, height=500)
+    st.dataframe(tb_portal, width=1500, height=500)
     file_content = generate_file_content(tb_portal)
     st.download_button(
           label='Descargar',
