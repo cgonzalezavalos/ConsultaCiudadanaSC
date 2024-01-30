@@ -43,6 +43,7 @@ def encuesta():
     df_consulta['count_discapacidad']=np.where(df_consulta['discapacidad']=='Sí',1,0)
     nombres_columnas = df_consulta.columns
     df_consulta.rename(columns={nombres_columnas[0]: 'Portal',nombres_columnas[1]: 'Ultima_Postulacion',nombres_columnas[2]:'Nota_facilidad_postulación',nombres_columnas[3]:'Nota_pertinencia_info_solicitada',nombres_columnas[4]:'Contactada_en_proceso',nombres_columnas[5]:'Nota_calidad_evaluacion_realizada',nombres_columnas[6]:'Nota_oportunidad_entrega_resultados',nombres_columnas[7]:'Nota_proceso_reclutamiento_seleccion',nombres_columnas[8]:'comentario_sugerencia_proceso_postulación',nombres_columnas[9]:'informacion_relevante_sobre_instituciones_publicas'}, inplace=True)
+    df_consulta['contador']=1
     return df_consulta
 
 df_encuesta = encuesta()
@@ -202,3 +203,7 @@ with st.container():
         st.dataframe(resultado_encuesta.head(20), width=1500, height=500)
         
         
+graf_1=px.bar(resultado_encuesta, x='Portal', y='Contador', color='Ultima_Postulacion', title='Respuestas por Portal')
+
+with st.container():
+    st.plotly_chart(graf_1, use_container_width=True)
