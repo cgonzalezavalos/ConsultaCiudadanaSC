@@ -206,7 +206,7 @@ with st.container():
         #st.dataframe(tb1, width=1500, height=500)
         
         
-graf_1=px.bar(tb1, x='Portal', y='Respuestas', color='genero',barmode='group' title='Respuestas por Portal')
+graf_1=px.bar(tb1, x='Portal', y='Respuestas', color='genero',barmode='group' ,title='Respuestas por Portal')
 
 with st.container():
     st.plotly_chart(graf_1, use_container_width=True)
