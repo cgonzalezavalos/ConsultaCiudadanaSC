@@ -234,7 +234,8 @@ with st.container():
 # Define el orden deseado para la categoría 'genero'
 ult_post_order = ['Menos de un mes','Entre un mes y seis (6) meses', 'Más de seis (6) meses y menos de un año', 'Más de un año y menos de tres años','Hace más de tres años']     
 afirmacion_order = ['Sí','No', 'No aplica']     
-graf_g1=px.bar(tb_g1, x='genero', y='porcentaje',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
+graf_g1_p=px.bar(tb_g1, x='genero', y='porcentaje',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
+graf_g1_c=px.bar(tb_g1, x='genero', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
 graf_g2=px.bar(tb_g2, x='genero', y='Respuestas',color='Nota_facilidad_postulación',barmode='group' ,title='Cuan fácil fue la última postulación?')
 graf_g3=px.bar(tb_g3, x='genero', y='Respuestas',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?')
 graf_g4=px.bar(tb_g4, x='genero', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
@@ -244,7 +245,13 @@ graf_g7=px.bar(tb_g7, x='genero', y='Respuestas',color='Nota_proceso_reclutamien
 
 
 with st.container():
-    st.plotly_chart(graf_g1, use_container_width=True)
+    col1,col2=st
+    with col1:
+        st.plotly_chart(graf_g1_p, use_container_width=True)
+    with col2:
+        st.plotly_chart(graf_g1_c, use_container_width=True)
+    
+
     st.plotly_chart(graf_g2, use_container_width=True)
     st.plotly_chart(graf_g3, use_container_width=True)
     st.plotly_chart(graf_g4, use_container_width=True)
