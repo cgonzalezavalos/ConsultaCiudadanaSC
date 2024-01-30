@@ -27,6 +27,15 @@ st.markdown(
 # Add horizontal line
 st.markdown("<hr>", unsafe_allow_html=True)
 
+# --------- genera archivo csv -----------------------------
+def generate_file_content(df):
+    # Generate the file content (e.g., CSV, JSON, etc.)
+    # In this example, we'll generate a CSV file
+    csv_content = df.to_csv(index=False)
+    return csv_content
+#------------------------------------------------------------------------
+
+
 #------------ carga de datos ------------------------------------
 @st.cache_data
 def encuesta():
@@ -175,3 +184,10 @@ else:
 
 with st.container():
     st.dataframe(tb_portal)
+    file_content = generate_file_content(tb_portal)
+    st.download_button(
+          label='Descargar',
+          data=file_content,
+          file_name='resultados_encuesta.csv',
+          mime='text/csv'
+          )
