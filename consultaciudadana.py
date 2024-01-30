@@ -184,7 +184,7 @@ else:
 respuestas=tb_portal['Respuestas'].sum()
 
 with st.container():
-    col1, col2=st.columns(2)
+    col1, col2=st.columns(spec=[0.2,0.8])
     with col1:
         valor = f"{respuestas:,}"
         st.markdown(f"<h1 style='text-align: center; color: grey;'>{valor}</h1>", unsafe_allow_html=True)
