@@ -263,6 +263,8 @@ with st.container():
             mime='text/csv'
             )
 
+
+
 # Define el orden deseado para la categoría 'genero'
 ult_post_order = ['Menos de un mes','Entre un mes y seis (6) meses', 'Más de seis (6) meses y menos de un año', 'Más de un año y menos de tres años','Hace más de tres años']     
 afirmacion_order = ['Sí','No', 'No aplica']     
@@ -287,42 +289,25 @@ graf_g6_c=px.bar(tb_g6, x='genero', y='Respuestas',color='Nota_oportunidad_entre
 graf_g7_p=px.bar(tb_g7, x='genero', y='porcentaje',color='Nota_proceso_reclutamiento_seleccion',barmode='group' ,title='Con que nota calificas el proceso de reclutamiento al que postuló?').update_layout(showlegend=False).update_yaxes(tickformat=".2%",range=[0, 1])
 graf_g7_c=px.bar(tb_g7, x='genero', y='Respuestas',color='Nota_proceso_reclutamiento_seleccion',barmode='group')
 
-
 with st.container():
-    col1,col2=st.columns(2)
-    with col1:
-        st.plotly_chart(graf_g1_p, use_container_width=True)
-    with col2:
-        st.plotly_chart(graf_g1_c, use_container_width=True)
-    col3,col4=st.columns(2)
-    with col3:
-        st.plotly_chart(graf_g2_p, use_container_width=True)
-    with col4:
-        st.plotly_chart(graf_g2_c, use_container_width=True)
-    col5,col6=st.columns(2)
-    with col3:
-        st.plotly_chart(graf_g3_p, use_container_width=True)
-    with col4:
-        st.plotly_chart(graf_g3_c, use_container_width=True)
-    col7,col8=st.columns(2)
-    with col3:
-        st.plotly_chart(graf_g4_p, use_container_width=True)
-    with col4:
-        st.plotly_chart(graf_g4_c, use_container_width=True)
-    col9,col10=st.columns(2)
-    with col9:
-        st.plotly_chart(graf_g5_p, use_container_width=True)
-    with col10:
-        st.plotly_chart(graf_g5_c, use_container_width=True)
-    col11,col12=st.columns(2)
-    with col11:
-        st.plotly_chart(graf_g6_p, use_container_width=True)
-    with col12:
-        st.plotly_chart(graf_g6_c, use_container_width=True)
-    col13,col14=st.columns(2)
-    with col13:
-        st.plotly_chart(graf_g7_p, use_container_width=True)
-    with col14:
-        st.plotly_chart(graf_g7_c, use_container_width=True)
+    visualizacion=st.selectbox('Selecciona como ver los datos',['Porcentaje','Cantidad'])
 
+if visualizacion == 'Porcentaje':
+    with st.container():
+        st.plotly_chart(graf_g1_p, use_container_width=True)
+        st.plotly_chart(graf_g2_p, use_container_width=True)
+        st.plotly_chart(graf_g3_p, use_container_width=True)
+        st.plotly_chart(graf_g4_p, use_container_width=True)
+        st.plotly_chart(graf_g5_p, use_container_width=True)
+        st.plotly_chart(graf_g6_p, use_container_width=True)
+        st.plotly_chart(graf_g7_p, use_container_width=True)
+else:
+    with st.container():
+        st.plotly_chart(graf_g1_c, use_container_width=True)
+        st.plotly_chart(graf_g2_c, use_container_width=True)
+        st.plotly_chart(graf_g3_c, use_container_width=True)
+        st.plotly_chart(graf_g4_c, use_container_width=True)
+        st.plotly_chart(graf_g5_c, use_container_width=True)
+        st.plotly_chart(graf_g6_c, use_container_width=True)
+        st.plotly_chart(graf_g7_c, use_container_width=True)
     
