@@ -207,7 +207,7 @@ with st.container():
         
         
 #graf_1=px.bar(tb1, x='Portal', y='Respuestas', color='genero',barmode='group' ,title='Respuestas por Portal')
-graf_1=px.bar(tb1, x='genero', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Respuestas por Portal')
+graf_1=px.bar(tb1, x='genero', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la ultima postulación')
 
 with st.container():
     st.plotly_chart(graf_1, use_container_width=True)
