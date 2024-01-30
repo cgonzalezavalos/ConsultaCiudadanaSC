@@ -113,7 +113,10 @@ with st.container():
 if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
     tb_portal = df_encuesta.groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
     resultado_encuesta=df_encuesta
+    tb_g0=resultado_encuesta.groupby(['genero']).agg(Total=('contador', 'sum')).reset_index()
     tb_g1=resultado_encuesta.groupby(['Ultima_Postulacion','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_g1=pd.merge(tb_g1,tb_g0,how='left',on='genero')
+    
     tb_g2=resultado_encuesta.groupby(['Nota_facilidad_postulación','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g3=resultado_encuesta.groupby(['Nota_pertinencia_info_solicitada','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g4=resultado_encuesta.groupby(['Contactada_en_proceso','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
@@ -197,6 +200,7 @@ else:
 
     tb_portal = df_encuesta[filtro].groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
     resultado_encuesta=df_encuesta[filtro]
+    tb_g0=resultado_encuesta[filtro].groupby(['genero']).agg(Total=('contador', 'sum')).reset_index()
     tb_g1=resultado_encuesta[filtro].groupby(['Ultima_Postulacion','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g2=resultado_encuesta[filtro].groupby(['Nota_facilidad_postulación','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_g3=resultado_encuesta[filtro].groupby(['Nota_pertinencia_info_solicitada','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
@@ -207,6 +211,7 @@ else:
     tb_g7=resultado_encuesta[filtro].groupby(['Nota_proceso_reclutamiento_seleccion','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
 #------------------------------------------------------------------------
 respuestas=tb_portal['Respuestas'].sum()
+tb_g1['porcentaje']=tb_g1['Respuestas']/tb_g1['Total']
 
 with st.container():
     col1, col2=st.columns(spec=[0.2,0.8])
@@ -229,7 +234,7 @@ with st.container():
 # Define el orden deseado para la categoría 'genero'
 ult_post_order = ['Menos de un mes','Entre un mes y seis (6) meses', 'Más de seis (6) meses y menos de un año', 'Más de un año y menos de tres años','Hace más de tres años']     
 afirmacion_order = ['Sí','No', 'No aplica']     
-graf_g1=px.bar(tb_g1, x='genero', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
+graf_g1=px.bar(tb_g1, x='genero', y='porcentaje',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
 graf_g2=px.bar(tb_g2, x='genero', y='Respuestas',color='Nota_facilidad_postulación',barmode='group' ,title='Cuan fácil fue la última postulación?')
 graf_g3=px.bar(tb_g3, x='genero', y='Respuestas',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?')
 graf_g4=px.bar(tb_g4, x='genero', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
