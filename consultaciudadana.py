@@ -128,8 +128,13 @@ if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 
     tb_g4=pd.merge(tb_g4,tb_g0,how='left',on='genero')
 
     tb_g5=resultado_encuesta.groupby(['Nota_calidad_evaluacion_realizada','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_g5=pd.merge(tb_g5,tb_g0,how='left',on='genero')
+
     tb_g6=resultado_encuesta.groupby(['Nota_oportunidad_entrega_resultados','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_g6=pd.merge(tb_g6,tb_g0,how='left',on='genero')
+
     tb_g7=resultado_encuesta.groupby(['Nota_proceso_reclutamiento_seleccion','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_g7=pd.merge(tb_g7,tb_g0,how='left',on='genero')
     
 else:
     if option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
@@ -222,15 +227,22 @@ else:
     tb_g4=pd.merge(tb_g4,tb_g0,how='left',on='genero')
 
     tb_g5=resultado_encuesta[filtro].groupby(['Nota_calidad_evaluacion_realizada','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
-    tb_g5=resultado_encuesta[filtro].groupby(['Nota_calidad_evaluacion_realizada','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_g5=pd.merge(tb_g5,tb_g0,how='left',on='genero')
+    
     tb_g6=resultado_encuesta[filtro].groupby(['Nota_oportunidad_entrega_resultados','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_g6=pd.merge(tb_g6,tb_g0,how='left',on='genero')
+
     tb_g7=resultado_encuesta[filtro].groupby(['Nota_proceso_reclutamiento_seleccion','genero']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_g7=pd.merge(tb_g7,tb_g0,how='left',on='genero')
 #------------------------------------------------------------------------
 respuestas=tb_portal['Respuestas'].sum()
 tb_g1['porcentaje']=tb_g1['Respuestas']/tb_g1['Total']
 tb_g2['porcentaje']=tb_g2['Respuestas']/tb_g2['Total']
 tb_g3['porcentaje']=tb_g3['Respuestas']/tb_g3['Total']
 tb_g4['porcentaje']=tb_g4['Respuestas']/tb_g4['Total']
+tb_g5['porcentaje']=tb_g5['Respuestas']/tb_g5['Total']
+tb_g6['porcentaje']=tb_g6['Respuestas']/tb_g6['Total']
+tb_g7['porcentaje']=tb_g7['Respuestas']/tb_g7['Total']
 
 with st.container():
     col1, col2=st.columns(spec=[0.2,0.8])
@@ -265,9 +277,14 @@ graf_g3_c=px.bar(tb_g3, x='genero', y='Respuestas',color='Nota_pertinencia_info_
 graf_g4_p=px.bar(tb_g4, x='genero', y='porcentaje',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
 graf_g4_c=px.bar(tb_g4, x='genero', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
 
-graf_g5=px.bar(tb_g5, x='genero', y='Respuestas',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?')
-graf_g6=px.bar(tb_g6, x='genero', y='Respuestas',color='Nota_oportunidad_entrega_resultados',barmode='group' ,title='Con que nota calificas la oportunidad de entrega de resultados?')
-graf_g7=px.bar(tb_g7, x='genero', y='Respuestas',color='Nota_proceso_reclutamiento_seleccion',barmode='group' ,title='Con que nota calificas el proceso de reclutamiento al que postuló?')
+graf_g5_p=px.bar(tb_g5, x='genero', y='porcentaje',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?')
+graf_g5_c=px.bar(tb_g5, x='genero', y='Respuestas',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?')
+
+graf_g6_p=px.bar(tb_g6, x='genero', y='porcentaje',color='Nota_oportunidad_entrega_resultados',barmode='group' ,title='Con que nota calificas la oportunidad de entrega de resultados?')
+graf_g6_c=px.bar(tb_g6, x='genero', y='Respuestas',color='Nota_oportunidad_entrega_resultados',barmode='group' ,title='Con que nota calificas la oportunidad de entrega de resultados?')
+
+graf_g7_p=px.bar(tb_g7, x='genero', y='porcentaje',color='Nota_proceso_reclutamiento_seleccion',barmode='group' ,title='Con que nota calificas el proceso de reclutamiento al que postuló?')
+graf_g7_c=px.bar(tb_g7, x='genero', y='Respuestas',color='Nota_proceso_reclutamiento_seleccion',barmode='group' ,title='Con que nota calificas el proceso de reclutamiento al que postuló?')
 
 
 with st.container():
@@ -291,10 +308,20 @@ with st.container():
         st.plotly_chart(graf_g4_p, use_container_width=True)
     with col4:
         st.plotly_chart(graf_g4_c, use_container_width=True)
+    col9,col10=st.columns(2)
+    with col9:
+        st.plotly_chart(graf_g5_p, use_container_width=True)
+    with col10:
+        st.plotly_chart(graf_g5_c, use_container_width=True)
+    col11,col12=st.columns(2)
+    with col11:
+        st.plotly_chart(graf_g6_p, use_container_width=True)
+    with col12:
+        st.plotly_chart(graf_g6_c, use_container_width=True)
+    col13,col14=st.columns(2)
+    with col13:
+        st.plotly_chart(graf_g7_p, use_container_width=True)
+    with col14:
+        st.plotly_chart(graf_g7_c, use_container_width=True)
 
     
-
-    
-    st.plotly_chart(graf_g5, use_container_width=True)
-    st.plotly_chart(graf_g6, use_container_width=True)
-    st.plotly_chart(graf_g7, use_container_width=True)
