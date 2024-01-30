@@ -107,7 +107,7 @@ with st.container():
 if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
     tb_portal = df_encuesta.groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
     resultado_encuesta=df_encuesta
-    tb1=resultado_encuesta.groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad','Ultima_Postulacion']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb1=resultado_encuesta.groupby(['Portal']).agg(Respuestas=('contador', 'sum')).reset_index()
 else:
     if option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
         filtro = df_encuesta['rango_etario'] == option1
@@ -184,7 +184,7 @@ else:
 
     tb_portal = df_encuesta[filtro].groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad']).agg(Respuestas=('genero', 'count')).reset_index()
     resultado_encuesta=df_encuesta[filtro]
-    tb1=resultado_encuesta[filtro].groupby(['Portal', 'genero', 'rango_etario', 'region', 'discapacidad','Ultima_Postulacion']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb1=resultado_encuesta[filtro].groupby(['Portal']).agg(Respuestas=('contador', 'sum')).reset_index()
 #------------------------------------------------------------------------
 respuestas=tb_portal['Respuestas'].sum()
 
@@ -194,7 +194,7 @@ with st.container():
         valor = f"{respuestas:,}"
         st.markdown(f"<h1 style='text-align: center; color: grey;'>{valor}</h1>", unsafe_allow_html=True)
         st.markdown("<h3 style='text-align: center; color: grey;'>Número de respuestas</h3>", unsafe_allow_html=True)
-        file_content = generate_file_content(tb_portal)
+        file_content = generate_file_content(resultado_encuesta)
         st.download_button(
             label='Descargar',
             data=file_content,
