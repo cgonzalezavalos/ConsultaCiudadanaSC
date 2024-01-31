@@ -337,17 +337,19 @@ with st.container():
 
 
 
-# Define el orden deseado para la categoría 'genero'
+# Define el orden deseado para la categoría ultima postulacion, afirmacion, region
 ult_post_order = ['Menos de un mes','Entre un mes y seis (6) meses', 'Más de seis (6) meses y menos de un año', 'Más de un año y menos de tres años','Hace más de tres años']     
-afirmacion_order = ['Sí','No', 'No aplica']     
+afirmacion_order = ['Sí','No', 'No aplica'] 
+region_order=['Región de Arica y Parinacota','Región de Tarapacá','Región de Antofagasta','Región de Atacama','Región de Coquimbo','Región de Valparaíso','Región Metropolitana','Región de O’Higgins','Región del Maule','Región del Ñuble','Región del Biobío','Región de la Araucanía','Región de Los Lagos','Región de Los Ríos','Región de Aysén','Región de Magallanes']    
+
 graf_g1_p=px.bar(tb_g1, x='genero', y='porcentaje',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order}).update_yaxes(tickformat=".2%",range=[0, 1])
 graf_g1_c=px.bar(tb_g1, x='genero', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
 
 graf_p1_p=px.bar(tb_p1, x='Portal', y='porcentaje',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order}).update_yaxes(tickformat=".2%",range=[0, 1])
 graf_p1_c=px.bar(tb_p1, x='Portal', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
 
-graf_reg1_p=px.bar(tb_reg1, x='region', y='porcentaje',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order}).update_yaxes(tickformat=".2%",range=[0, 1])
-graf_reg1_c=px.bar(tb_reg1, x='region', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
+graf_reg1_p=px.bar(tb_reg1, x='region', y='porcentaje',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'region': region_order}).update_yaxes(tickformat=".2%",range=[0, 1])
+graf_reg1_c=px.bar(tb_reg1, x='region', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'region': region_order})
 
 graf_g2_p=px.bar(tb_g2, x='genero', y='porcentaje',color='Nota_facilidad_postulación',barmode='group' ,title='Cuan fácil fue la última postulación?').update_yaxes(tickformat=".2%",range=[0, 1])
 graf_g2_c=px.bar(tb_g2, x='genero', y='Respuestas',color='Nota_facilidad_postulación',barmode='group',title='Cuan fácil fue la última postulación?')
@@ -373,8 +375,8 @@ graf_g4_c=px.bar(tb_g4, x='genero', y='Respuestas',color='Contactada_en_proceso'
 graf_p4_p=px.bar(tb_p4, x='Portal', y='porcentaje',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order}).update_yaxes(tickformat=".2%",range=[0, 1])
 graf_p4_c=px.bar(tb_p4, x='Portal', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
 
-graf_reg4_p=px.bar(tb_reg4, x='region', y='porcentaje',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order}).update_yaxes(tickformat=".2%",range=[0, 1])
-graf_reg4_c=px.bar(tb_reg4, x='region', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
+graf_reg4_p=px.bar(tb_reg4, x='region', y='porcentaje',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'region': region_order}).update_yaxes(tickformat=".2%",range=[0, 1])
+graf_reg4_c=px.bar(tb_reg4, x='region', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'region': region_order})
 
 graf_g5_p=px.bar(tb_g5, x='genero', y='porcentaje',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?').update_yaxes(tickformat=".2%",range=[0, 1])
 graf_g5_c=px.bar(tb_g5, x='genero', y='Respuestas',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?')
