@@ -145,6 +145,23 @@ if option1 == 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 
     tb_p7=resultado_encuesta.groupby(['Nota_proceso_reclutamiento_seleccion','Portal']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_p7=pd.merge(tb_p7,tb_p0,how='left',on='Portal')
 
+    tb_reg0=resultado_encuesta.groupby(['region']).agg(Total=('contador', 'sum')).reset_index()
+    tb_reg1=resultado_encuesta.groupby(['Ultima_Postulacion','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg1=pd.merge(tb_reg1,tb_reg0,how='left',on='region')
+    tb_reg2=resultado_encuesta.groupby(['Nota_facilidad_postulación','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg2=pd.merge(tb_reg2,tb_reg0,how='left',on='region')
+    tb_reg3=resultado_encuesta.groupby(['Nota_pertinencia_info_solicitada','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg3=pd.merge(tb_reg3,tb_reg0,how='left',on='region')
+    tb_reg4=resultado_encuesta.groupby(['Contactada_en_proceso','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg4=pd.merge(tb_reg4,tb_reg0,how='left',on='region')
+    tb_reg5=resultado_encuesta.groupby(['Nota_calidad_evaluacion_realizada','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg5=pd.merge(tb_reg5,tb_reg0,how='left',on='region')
+    tb_reg6=resultado_encuesta.groupby(['Nota_oportunidad_entrega_resultados','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg6=pd.merge(tb_reg6,tb_reg0,how='left',on='region')
+    tb_reg7=resultado_encuesta.groupby(['Nota_proceso_reclutamiento_seleccion','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg7=pd.merge(tb_reg7,tb_reg0,how='left',on='region')
+
+
     
 else:
     if option1 != 'Todos' and option2 == 'Todos' and option3 == 'Todos' and option4 == 'Todos' and option5 == 'Todos':
@@ -254,6 +271,23 @@ else:
     tb_p7=resultado_encuesta[filtro].groupby(['Nota_proceso_reclutamiento_seleccion','Portal']).agg(Respuestas=('contador', 'sum')).reset_index()
     tb_p7=pd.merge(tb_p7,tb_p0,how='left',on='Portal')
 
+    tb_reg0=resultado_encuesta[filtro].groupby(['region']).agg(Total=('contador', 'sum')).reset_index()
+    tb_reg1=resultado_encuesta[filtro].groupby(['Ultima_Postulacion','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg1=pd.merge(tb_reg1,tb_reg0,how='left',on='region')
+    tb_reg2=resultado_encuesta[filtro].groupby(['Nota_facilidad_postulación','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg2=pd.merge(tb_reg2,tb_reg0,how='left',on='region')
+    tb_reg3=resultado_encuesta[filtro].groupby(['Nota_pertinencia_info_solicitada','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg3=pd.merge(tb_reg3,tb_reg0,how='left',on='region')
+    tb_reg4=resultado_encuesta[filtro].groupby(['Contactada_en_proceso','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg4=pd.merge(tb_reg4,tb_reg0,how='left',on='region')
+    tb_reg5=resultado_encuesta[filtro].groupby(['Nota_calidad_evaluacion_realizada','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg5=pd.merge(tb_reg5,tb_reg0,how='left',on='region')
+    tb_reg6=resultado_encuesta[filtro].groupby(['Nota_oportunidad_entrega_resultados','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg6=pd.merge(tb_reg6,tb_reg0,how='left',on='region')
+    tb_reg7=resultado_encuesta[filtro].groupby(['Nota_proceso_reclutamiento_seleccion','region']).agg(Respuestas=('contador', 'sum')).reset_index()
+    tb_reg7=pd.merge(tb_reg7,tb_reg0,how='left',on='region')
+
+
 #------------------------------------------------------------------------
 respuestas=tb_portal['Respuestas'].sum()
 tb_g1['porcentaje']=tb_g1['Respuestas']/tb_g1['Total']
@@ -271,6 +305,14 @@ tb_p4['porcentaje']=tb_p4['Respuestas']/tb_p4['Total']
 tb_p5['porcentaje']=tb_p5['Respuestas']/tb_p5['Total']
 tb_p6['porcentaje']=tb_p6['Respuestas']/tb_p6['Total']
 tb_p7['porcentaje']=tb_p7['Respuestas']/tb_p7['Total']
+
+tb_reg1['porcentaje']=tb_reg1['Respuestas']/tb_reg1['Total']
+tb_reg2['porcentaje']=tb_reg2['Respuestas']/tb_reg2['Total']
+tb_reg3['porcentaje']=tb_reg3['Respuestas']/tb_reg3['Total']
+tb_reg4['porcentaje']=tb_reg4['Respuestas']/tb_reg4['Total']
+tb_reg5['porcentaje']=tb_reg5['Respuestas']/tb_reg5['Total']
+tb_reg6['porcentaje']=tb_reg6['Respuestas']/tb_reg6['Total']
+tb_reg7['porcentaje']=tb_reg7['Respuestas']/tb_reg7['Total']
 
 
 
@@ -304,11 +346,17 @@ graf_g1_c=px.bar(tb_g1, x='genero', y='Respuestas',color='Ultima_Postulacion',ba
 graf_p1_p=px.bar(tb_p1, x='Portal', y='porcentaje',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order}).update_yaxes(tickformat=".2%",range=[0, 1])
 graf_p1_c=px.bar(tb_p1, x='Portal', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
 
+graf_reg1_p=px.bar(tb_reg1, x='region', y='porcentaje',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order}).update_yaxes(tickformat=".2%",range=[0, 1])
+graf_reg1_c=px.bar(tb_reg1, x='region', y='Respuestas',color='Ultima_Postulacion',barmode='group' ,title='Hace cuanto fue la última postulación?',category_orders={'Ultima_Postulacion': ult_post_order})
+
 graf_g2_p=px.bar(tb_g2, x='genero', y='porcentaje',color='Nota_facilidad_postulación',barmode='group' ,title='Cuan fácil fue la última postulación?').update_yaxes(tickformat=".2%",range=[0, 1])
 graf_g2_c=px.bar(tb_g2, x='genero', y='Respuestas',color='Nota_facilidad_postulación',barmode='group',title='Cuan fácil fue la última postulación?')
 
 graf_p2_p=px.bar(tb_p2, x='Portal', y='porcentaje',color='Nota_facilidad_postulación',barmode='group' ,title='Cuan fácil fue la última postulación?').update_yaxes(tickformat=".2%",range=[0, 1])
 graf_p2_c=px.bar(tb_p2, x='Portal', y='Respuestas',color='Nota_facilidad_postulación',barmode='group',title='Cuan fácil fue la última postulación?')
+
+graf_reg2_p=px.bar(tb_reg2, x='region', y='porcentaje',color='Nota_facilidad_postulación',barmode='group' ,title='Cuan fácil fue la última postulación?').update_yaxes(tickformat=".2%",range=[0, 1])
+graf_reg2_c=px.bar(tb_reg2, x='region', y='Respuestas',color='Nota_facilidad_postulación',barmode='group',title='Cuan fácil fue la última postulación?')
 
 graf_g3_p=px.bar(tb_g3, x='genero', y='porcentaje',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?').update_yaxes(tickformat=".2%",range=[0, 1])
 graf_g3_c=px.bar(tb_g3, x='genero', y='Respuestas',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?')
@@ -316,11 +364,17 @@ graf_g3_c=px.bar(tb_g3, x='genero', y='Respuestas',color='Nota_pertinencia_info_
 graf_p3_p=px.bar(tb_p3, x='Portal', y='porcentaje',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?').update_yaxes(tickformat=".2%",range=[0, 1])
 graf_p3_c=px.bar(tb_p3, x='Portal', y='Respuestas',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?')
 
+graf_reg3_p=px.bar(tb_reg3, x='region', y='porcentaje',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?').update_yaxes(tickformat=".2%",range=[0, 1])
+graf_reg3_c=px.bar(tb_reg3, x='region', y='Respuestas',color='Nota_pertinencia_info_solicitada',barmode='group' ,title='Cuan pertinente es la información solicitada en la postulación?')
+
 graf_g4_p=px.bar(tb_g4, x='genero', y='porcentaje',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order}).update_yaxes(tickformat=".2%",range=[0, 1])
 graf_g4_c=px.bar(tb_g4, x='genero', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
 
 graf_p4_p=px.bar(tb_p4, x='Portal', y='porcentaje',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order}).update_yaxes(tickformat=".2%",range=[0, 1])
 graf_p4_c=px.bar(tb_p4, x='Portal', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
+
+graf_reg4_p=px.bar(tb_reg4, x='region', y='porcentaje',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order}).update_yaxes(tickformat=".2%",range=[0, 1])
+graf_reg4_c=px.bar(tb_reg4, x='region', y='Respuestas',color='Contactada_en_proceso',barmode='group' ,title='Fue contactada para entregar feedback del proceso?',category_orders={'Contactada_en_proceso':afirmacion_order})
 
 graf_g5_p=px.bar(tb_g5, x='genero', y='porcentaje',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?').update_yaxes(tickformat=".2%",range=[0, 1])
 graf_g5_c=px.bar(tb_g5, x='genero', y='Respuestas',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?')
@@ -328,11 +382,17 @@ graf_g5_c=px.bar(tb_g5, x='genero', y='Respuestas',color='Nota_calidad_evaluacio
 graf_p5_p=px.bar(tb_p5, x='Portal', y='porcentaje',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?').update_yaxes(tickformat=".2%",range=[0, 1])
 graf_p5_c=px.bar(tb_p5, x='Portal', y='Respuestas',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?')
 
+graf_reg5_p=px.bar(tb_reg5, x='region', y='porcentaje',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?').update_yaxes(tickformat=".2%",range=[0, 1])
+graf_reg5_c=px.bar(tb_reg5, x='region', y='Respuestas',color='Nota_calidad_evaluacion_realizada',barmode='group' ,title='Con que nota calificas el proceso de evaluación?')
+
 graf_g6_p=px.bar(tb_g6, x='genero', y='porcentaje',color='Nota_oportunidad_entrega_resultados',barmode='group' ,title='Con que nota calificas la oportunidad de entrega de resultados?').update_yaxes(tickformat=".2%",range=[0, 1])
 graf_g6_c=px.bar(tb_g6, x='genero', y='Respuestas',color='Nota_oportunidad_entrega_resultados',barmode='group' ,title='Con que nota calificas la oportunidad de entrega de resultados?')
 
 graf_p6_p=px.bar(tb_p6, x='Portal', y='porcentaje',color='Nota_oportunidad_entrega_resultados',barmode='group' ,title='Con que nota calificas la oportunidad de entrega de resultados?').update_yaxes(tickformat=".2%",range=[0, 1])
 graf_p6_c=px.bar(tb_p6, x='Portal', y='Respuestas',color='Nota_oportunidad_entrega_resultados',barmode='group' ,title='Con que nota calificas la oportunidad de entrega de resultados?')
+
+graf_reg6_p=px.bar(tb_reg6, x='region', y='porcentaje',color='Nota_oportunidad_entrega_resultados',barmode='group' ,title='Con que nota calificas la oportunidad de entrega de resultados?').update_yaxes(tickformat=".2%",range=[0, 1])
+graf_reg6_c=px.bar(tb_reg6, x='region', y='Respuestas',color='Nota_oportunidad_entrega_resultados',barmode='group' ,title='Con que nota calificas la oportunidad de entrega de resultados?')
 
 graf_g7_p=px.bar(tb_g7, x='genero', y='porcentaje',color='Nota_proceso_reclutamiento_seleccion',barmode='group' ,title='Con que nota calificas el proceso de reclutamiento al que postuló?').update_yaxes(tickformat=".2%",range=[0, 1])
 graf_g7_c=px.bar(tb_g7, x='genero', y='Respuestas',color='Nota_proceso_reclutamiento_seleccion',barmode='group',title='Con que nota calificas el proceso de reclutamiento al que postuló?')
@@ -340,8 +400,11 @@ graf_g7_c=px.bar(tb_g7, x='genero', y='Respuestas',color='Nota_proceso_reclutami
 graf_p7_p=px.bar(tb_p7, x='Portal', y='porcentaje',color='Nota_proceso_reclutamiento_seleccion',barmode='group' ,title='Con que nota calificas el proceso de reclutamiento al que postuló?').update_yaxes(tickformat=".2%",range=[0, 1])
 graf_p7_c=px.bar(tb_p7, x='Portal', y='Respuestas',color='Nota_proceso_reclutamiento_seleccion',barmode='group',title='Con que nota calificas el proceso de reclutamiento al que postuló?')
 
+graf_reg7_p=px.bar(tb_reg7, x='region', y='porcentaje',color='Nota_proceso_reclutamiento_seleccion',barmode='group' ,title='Con que nota calificas el proceso de reclutamiento al que postuló?').update_yaxes(tickformat=".2%",range=[0, 1])
+graf_reg7_c=px.bar(tb_reg7, x='region', y='Respuestas',color='Nota_proceso_reclutamiento_seleccion',barmode='group',title='Con que nota calificas el proceso de reclutamiento al que postuló?')
+
 with st.container():
-    dimension=st.selectbox('Selecciona la dimensión por la cual visualizar los resultados.',['Género','Portal'])
+    dimension=st.selectbox('Selecciona la dimensión por la cual visualizar los resultados.',['Género','Portal','Región'])
 
 if dimension == 'Género':
     with st.container():
@@ -388,5 +451,29 @@ if dimension=='Portal':
             st.plotly_chart(graf_p5_c, use_container_width=True)
             st.plotly_chart(graf_p6_c, use_container_width=True)
             st.plotly_chart(graf_p7_c, use_container_width=True)
+
+if dimension=='Región':
+    with st.container():
+        visualizacion=st.selectbox('Selecciona como ver los datos',['Porcentaje','Cantidad'])
+
+    if visualizacion == 'Porcentaje':
+        with st.container():
+            st.plotly_chart(graf_reg1_p, use_container_width=True)
+            st.plotly_chart(graf_reg2_p, use_container_width=True)
+            st.plotly_chart(graf_reg3_p, use_container_width=True)
+            st.plotly_chart(graf_reg4_p, use_container_width=True)
+            st.plotly_chart(graf_reg5_p, use_container_width=True)
+            st.plotly_chart(graf_reg6_p, use_container_width=True)
+            st.plotly_chart(graf_reg7_p, use_container_width=True)
+    else:
+        with st.container():
+            st.plotly_chart(graf_reg1_c, use_container_width=True)
+            st.plotly_chart(graf_reg2_c, use_container_width=True)
+            st.plotly_chart(graf_reg3_c, use_container_width=True)
+            st.plotly_chart(graf_reg4_c, use_container_width=True)
+            st.plotly_chart(graf_reg5_c, use_container_width=True)
+            st.plotly_chart(graf_reg6_c, use_container_width=True)
+            st.plotly_chart(graf_reg7_c, use_container_width=True)
+
     
     
