@@ -341,7 +341,7 @@ graf_p7_p=px.bar(tb_p7, x='Portal', y='porcentaje',color='Nota_proceso_reclutami
 graf_p7_c=px.bar(tb_p7, x='Portal', y='Respuestas',color='Nota_proceso_reclutamiento_seleccion',barmode='group',title='Con que nota calificas el proceso de reclutamiento al que postuló?')
 
 with st.container():
-    dimension=st.selectbox('Selecciona la dimensión',['Género','Portal'])
+    dimension=st.selectbox('Selecciona la dimensión por la cual visualizar los resultados.',['Género','Portal'])
 
 if dimension == 'Género':
     with st.container():
