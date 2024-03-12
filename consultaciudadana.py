@@ -52,7 +52,8 @@ def encuesta():
     return df_consulta
 
 df_encuesta = encuesta()
-df_encuesta=df_encuesta[~df_encuesta['Portal'].isin(['Nunca he postulado','No aplica'])]
+#df_encuesta=df_encuesta[~df_encuesta['Portal'].isin(['Nunca he postulado','No aplica'])]
+df_encuesta=df_encuesta[~df_encuesta['Portal'].isin(['No aplica'])]
 #------------------------------------------------------------------------
 
 #------------------------------------------------------------------------
